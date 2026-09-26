@@ -23,22 +23,32 @@ browser, and nothing needs installing.
 4. **Sanity checks.** If the colour is far from every point on the scale (ΔE > 15) or the patch
    is uneven, the app shows a warning instead of silently reporting a misleading number.
 
-The core maths is in `src/color.ts` and `src/gradient.ts` and is unit-tested.
+The core maths is in `src/color.ts`, `src/gradient.ts` and `src/calibration.ts`, and it is unit-tested.
 
-## Accuracy tips
+## Calibration
 
-Phone cameras adjust white balance and exposure automatically, so the same patch
-looks different under different lighting. For reliable numbers:
+Phone cameras adjust white balance and exposure automatically, so the same strip
+looks different under different lighting. The **Calibrate** tab has three steps:
 
-- **Calibrate under the lighting you'll measure in.** Open *Scale & threshold*, point the
-  camera at a printed reference card for each shade, and tap **Use current colour**
-  for that stop.
-- Use consistent, diffuse light, and avoid glare and shadows on the patch.
-- Keep a white reference card in the frame if possible (a possible future feature is automatic
-  white-balance correction from a reference area).
+1. **Baseline (unused strip).** Scan an unused strip under the light you'll test in.
+   The app knows what an unused pad *should* look like (white by default) and measures
+   what the camera *actually* sees. The difference is the camera's colour cast and
+   exposure, which is undone on every later scan with a per-channel gain in linear
+   light. This works like setting a custom white balance on a camera (a von Kries
+   correction). Redo it when the lighting or phone changes; the Scan view shows how
+   old the baseline is. The code and tests are in `src/calibration.ts`.
+2. **Colour scale.** Set each stop's colour and value, ideally by scanning the printed
+   colour chart that came with the strips ("Use current colour"). Scanned colours
+   are stored *after* baseline correction, so they stay valid when you recapture the baseline.
+3. **Threshold & sampling.** Set the threshold, the unit, how the percentage is reported,
+   and the size of the sample square.
+
+Other tips: use even, diffuse light, and avoid glare and shadows on the pad.
 
 ## Using it
 
+- **Scan** tab: aim the square at the pad and read the value.
+- **Calibrate** tab: set the baseline and colour scale (see above).
 - **Start camera** opens the rear camera and shows a live reading.
 - **Hold reading** freezes the frame and reads the result aloud to screen readers.
 - **Upload photo** works on desktop too, and on phones it can open the camera directly.

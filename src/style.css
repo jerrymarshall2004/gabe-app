@@ -440,3 +440,123 @@ input[type='range'] {
     transition: none !important;
   }
 }
+
+/* ---------- Tabs & views ---------- */
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  margin: 0 0 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.tab {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+}
+.tab[aria-current='page'] {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.view-heading {
+  margin: 4px 0 12px;
+  font-size: 1.25rem;
+}
+.view-heading:focus,
+#scan-heading:focus {
+  outline: none;
+}
+
+h3 {
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.step {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: 0.85rem;
+  flex: none;
+}
+
+.btn.wide {
+  width: 100%;
+  margin: 8px 0;
+  text-decoration: none;
+}
+
+.inline-field,
+.check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  margin: 8px 0;
+}
+.inline-field .hint {
+  display: block;
+  margin: 0;
+}
+.check input {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  flex: none;
+  accent-color: var(--accent);
+}
+
+.baseline-result {
+  border-top: 1px solid var(--border);
+  margin-top: 12px;
+  padding-top: 12px;
+}
+.compare {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.compare figure {
+  margin: 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.compare .swatch {
+  margin: 0 auto 4px;
+}
+.compare .arrow {
+  font-size: 1.5rem;
+  color: var(--muted);
+}
+.notes.warn {
+  color: var(--over);
+}
+
+.baseline-chip {
+  margin: 12px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+a {
+  color: var(--accent);
+  font-weight: 600;
+}

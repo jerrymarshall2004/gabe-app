@@ -1,3 +1,4 @@
+import type { Baseline } from './calibration';
 import type { Stop, ThresholdMode } from './gradient';
 
 export interface Settings {
@@ -7,6 +8,11 @@ export interface Settings {
   unit: string;
   /** Sample square size as a fraction of the frame's shorter side. */
   sampleSize: number;
+  /** Camera baseline from an unused strip, or null if not captured yet. */
+  baseline: Baseline | null;
+  useBaseline: boolean;
+  /** What an unused pad should look like; the baseline corrects towards this. */
+  stripReference: string;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -19,6 +25,9 @@ export const DEFAULT_SETTINGS: Settings = {
   thresholdMode: 'range',
   unit: '',
   sampleSize: 0.2,
+  baseline: null,
+  useBaseline: true,
+  stripReference: '#ffffff',
 };
 
 const KEY = 'patch-scanner-settings-v1';
